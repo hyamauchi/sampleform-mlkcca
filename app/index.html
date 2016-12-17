@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>フォーム</title>
+    <link rel="stylesheet" href="css/style.css" type="text/css" />
+    <script src="//cdn.mlkcca.com/v0.6.0/milkcocoa.js"></script>
+    <script src="dist/load-milkcocoa.min.js"></script>
+</head>
+<body>
+<form milkform>
+  <input type="text" name="e-mail">
+  <input type="number" data-type="number" name="age"> <!-- 保存時の値をNumber型にしたい場合はdata-typeにnumberを指定して下さい -->
+  <textarea name="message"></textarea>
+  <input id="submitBtn" type="submit" value="送信">
+</form>
+<div milkform-fallback style="display: none;">Milkcocoaが対応していないブラウザでは、フォームが表示されません。その代わりにmilkform-fallbackという属性を含む要素があれば、そちらが表示されます。具体的には、ユーザーエージェントがAndroidの4系未満、IE9以下の場合フォールバックが表示されます。フォールバックには、メールアドレスを記載して問い合わせを促すようにすると良いかと思います。</div>
+    <script src="//cdn.mlkcca.com/milkform.min.js"></script>
+    <script src="dist/main.min.js"></script>
+</body>
+</html>
