@@ -1,22 +1,67 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" ng-app="myApp">
+
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>フォーム</title>
-    <link rel="stylesheet" href="css/style.css" type="text/css" />
-    <script src="//cdn.mlkcca.com/v0.6.0/milkcocoa.js"></script>
-    <script src="dist/load-milkcocoa.min.js"></script>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Milkcocoa 問い合わせフォーム サンプル</title>
+  <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" type="text/css" href="css/app.css" />
+  <script src="//cdn.mlkcca.com/v0.6.0/milkcocoa.js"></script>
+  <script src="dist/load-milkcocoa.min.js"></script>
 </head>
-<body>
-<form milkform>
-  <input type="text" name="e-mail">
-  <input type="number" data-type="number" name="age"> <!-- 保存時の値をNumber型にしたい場合はdata-typeにnumberを指定して下さい -->
-  <textarea name="message"></textarea>
-  <input id="submitBtn" type="submit" value="送信">
-</form>
-<div milkform-fallback style="display: none;">Milkcocoaが対応していないブラウザでは、フォームが表示されません。その代わりにmilkform-fallbackという属性を含む要素があれば、そちらが表示されます。具体的には、ユーザーエージェントがAndroidの4系未満、IE9以下の場合フォールバックが表示されます。フォールバックには、メールアドレスを記載して問い合わせを促すようにすると良いかと思います。</div>
-    <script src="//cdn.mlkcca.com/milkform.min.js"></script>
-    <script src="dist/main.min.js"></script>
+
+<body ng-controller="MyController as main">
+  <div class="container tight">
+    <h1>Milkcocoa 問い合わせフォーム サンプル</h1>
+    <div class="description">
+      <div milkform-fallback style="display: none;">Milkcocoaが対応していないブラウザでは、フォームが表示されません。その代わりにmilkform-fallbackという属性を含む要素があれば、そちらが表示されます。具体的には、ユーザーエージェントがAndroidの4系未満、IE9以下の場合フォールバックが表示されます。フォールバックには、メールアドレスを記載して問い合わせを促すようにすると良いかと思います。</div>
+    </div>
+    <form name="myForm" ng-submit="main.onsubmit()" milkform novalidate>
+      <div id="validation-summary">
+        <span ng-show="myForm.email.$error.required">メールアドレスは必須です。</span>
+        <span ng-show="myForm.email.$error.email">メールアドレスは正しい形式で入力してください。</span>
+        <span ng-show="myForm.age.$error.required">年齢は必須です。</span>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="row form-group">
+            <label class="col-xs-4 control-label" for="email">メールアドレス<br /><span class="label label-danger">必須</span></label>
+            <div class="col-xs-8">
+              <input id="email" name="email" type="email" class="form-control" style="width:60%;" ng-model="main.model.email" required />
+            </div>
+          </div>
+          <div class="row form-group">
+            <label class="col-xs-4 control-label" for="age">年齢<br /><span class="label label-danger">必須</span></label>
+            <div class="col-xs-8">
+              <input id="age" name="age" type="number" data-type="number" class="form-control" style="width:60%;" ng-model="main.model.age" required />
+            </div>
+          </div>
+          <div class="row form-group">
+            <label class="col-xs-4 control-label" for="comment">コメント<br /><span class="label label-warning">任意</span></label>
+            <div class="col-xs-8">
+              <textarea id="comment" name="comment" type="text" class="form-control" style="width:60%;" ng-model="main.model.comment" rows="6"></textarea>
+            </div>
+          </div>
+          <div class="submit-frame">
+            <input type="submit" value="送信する" id="customform-submit" class="btn btn-block btn-submit" ng-disabled="myForm.$invalid" />
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div id="footer">
+    <div class="container">
+      <p class="text-muted">Copyright &copy; 2016</p>
+    </div>
+  </div>
 </body>
+<script src="//cdn.mlkcca.com/milkform.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.2/ui-bootstrap-tpls.min.js"></script>
+<script src="dist/main.min.js"></script>
+
 </html>
